@@ -5,9 +5,7 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <div>
-          {/* <div className="blur" style={{top: '-18%', right: '0'}}></div>
-    <div className="blur" style={{top: '42%', left: '-8rem'}}></div> */}
+    <div className="bg-white">
       <RouterProvider router={router}></RouterProvider>
       <ToastContainer/>
     </div>

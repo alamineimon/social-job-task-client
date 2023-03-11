@@ -2,10 +2,11 @@ import React from "react";
 import ProfileCard from "../components/ProfileCard";
 import AllFlowers from "../components/AllFlowers";
 import TrendsForYou from "../components/TrendsForYou";
+import AllPost from "../components/AllPost";
 
 const Home = () => {
   return (
-    <section className="bg-[#0e1015]">
+    <section>
       <div className="w-11/12 mx-auto py-10 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {/* mini profile and followers section */}
         <div>
@@ -14,7 +15,7 @@ const Home = () => {
         </div>
         {/* All types of post here */}
         <div className="lg:col-span-2 space-y-5">
-          <p>All post here</p>) : (<p>No post found</p>)
+          <AllPost />
         </div>
         {/* trends for you */}
         <div>
