@@ -25,5 +25,27 @@ export const PostsData = [
         desc: "At Archery Festival",
         likes: 800,
         liked: false
-    }
+    },
+    {
+        img: postPic1,
+        name: 'Tzuyu',
+        desc: "Happy New Year all friends! #2023",
+        likes: 2300,
+        liked: false
+    },
+    {
+        img: postPic2,
+        name: 'Lisa',
+        desc: "Party time :)",
+        likes: 2300,
+        liked: false
+
+    },
+    {
+        img:postPic3,
+        name: "Selena Gomez",
+        desc: "At Archery Festival",
+        likes: 800,
+        liked: false
+    },
 ]

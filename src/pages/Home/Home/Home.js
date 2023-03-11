@@ -3,10 +3,11 @@ import ProfileCard from "../components/ProfileCard";
 import AllFlowers from "../components/AllFlowers";
 import TrendsForYou from "../components/TrendsForYou";
 import AllPost from "../components/AllPost";
+import '../../../App.css'
 
 const Home = () => {
   return (
-    <section>
+    <section className="App">
       <div className="w-11/12 mx-auto py-10 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {/* mini profile and followers section */}
         <div>

@@ -1,12 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Cover from "../../../assets/img/cover.png";
 import Profile from "../../../assets/img/profileImg.jpg";
 
 const ProfileCard = () => {
+  const location = useLocation();
+  let currentPath = location.pathname.split("/")[1];
   return (
     <div className="flex-col relative gap-4 overflow-x-clip rounded-lg bg-white text-black ">
-      <div className="flex-col relative items-center justify-center">
+      {currentPath !== "profile" ? 
+      (<div className="flex-col relative items-center justify-center">
         <img src={Cover} alt="" className="w-full " />
         <img
           src={Profile}
@@ -14,7 +17,16 @@ const ProfileCard = () => {
           className="w-20 rounded-full absolute
         top-16 left-28"
         />
-      </div>
+      </div>) :
+      (<div className="flex-col relative items-center justify-center">
+        <img src={Cover} alt="" className="w-full " />
+        <img
+          src={Profile}
+          alt=""
+          className="w-28 rounded-full absolute
+        top-[160px] left-[240px]"
+        />
+      </div>)}
       <div className="p-4">
         <div className="text-center mt-12 gap-2">
           <p className="font-bold">Al Amin Eimon</p>
@@ -39,9 +51,11 @@ const ProfileCard = () => {
 
           <hr />
         </div>
-        <Link>
-            <p className="text-center text-primary font-bold mt-6" >My Profile</p>
+        {currentPath !== "profile" ?<Link to='/profile'>
+          <p className="text-center text-primary font-bold mt-6" >My Profile</p>
         </Link>
+        : ""}
+        
       </div>
     </div>
   );
