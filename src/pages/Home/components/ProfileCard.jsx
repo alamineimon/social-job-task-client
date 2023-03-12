@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import Cover from "../../../assets/img/cover.png";
 import Profile from "../../../assets/img/profileImg.jpg";
 
+
 const ProfileCard = () => {
   const location = useLocation();
   let currentPath = location.pathname.split("/")[1];
