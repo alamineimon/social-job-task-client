@@ -28,27 +28,20 @@ const AddPost = () => {
     reset,
   } = useForm();
 
-
-
   return (
     <div className="flex bg-white p-4 rounded-md gap-4">
       <img src={ProfileImage} alt="" className="w-12 h-12 rounded-full" />
-      <form
-       className="flex-col w-11/12 gap-4">
-        <div className="form-control w-full relative mt-4">
+      <div className="flex-col w-11/12 gap-4">
           <input
             type="text"
             name="email"
-            {...register("postTitle", {
-            })}
+           
             placeholder="What's on your mind ?"
             className="bg-gray-100 rounded-md w-full text-md focus:outline-primary p-3 mb-2 border-none outline-non "
           />
-        </div>
         <div className="flex justify-around">
-
           <div
-            className="form-control p-1 pl-2 pr-2 rounded-sm flex justify-center items-center hover:cursor-pointer text-[#4CB256]"
+            className=" p-1 pl-2 pr-2 rounded-sm flex justify-center items-center hover:cursor-pointer text-[#4CB256]"
             onClick={() => imageRef.current.click()}
           >
             <CiImageOn />
@@ -79,19 +72,21 @@ const AddPost = () => {
           </div>
         </div>
         {image && (
-          <div className="relative">
-            <MdOutlineCancel
-              onClick={() => setImage(null)}
-              className="absolute right-2 text-2xl text-red-600 top-2 cursor-pointer"
-            />
-            <img
-              src={image.image}
-              alt=""
-              className="w-full max-h-80 object-cover rounded-md"
-            />
+          <div className="flex -ml-10 w-full justify-center items-center">
+            <div className="relative">
+              <MdOutlineCancel
+                onClick={() => setImage(null)}
+                className="absolute right-2 text-2xl text-red-600 top-2 cursor-pointer"
+              />
+              <img
+                src={image.image}
+                alt=""
+                className="w-full max-h-80 object-cover rounded-md"
+              />
+            </div>
           </div>
         )}
-      </form>
+      </div>
     </div>
   );
 };
