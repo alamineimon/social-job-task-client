@@ -1,5 +1,6 @@
 import React from "react";
 import { BsPencil } from "react-icons/bs";
+import ProfileModal from "../../Modal/ProfileModal";
 
 const InfoCard = () => {
   return (
@@ -7,7 +8,10 @@ const InfoCard = () => {
       <div className="flex justify-between items-center mb-4">
         <h4>Your Info</h4>
         <div className="cursor-pointer">
-          <BsPencil width="2rem" height="1.2rem" />
+          <label htmlFor="ProfileModal" className="btn-ghost cursor-pointer ">
+            <BsPencil width="2rem" height="1.2rem" />
+          </label>
+          <ProfileModal/>
         </div>
       </div>
 
@@ -39,6 +43,11 @@ const InfoCard = () => {
           Logout
         </button>
       </div>
+
+      {/* The button to open modal */}
+
+      {/* Put this part before </body> tag */}
+
     </div>
   );
 };
