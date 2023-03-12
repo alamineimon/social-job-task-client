@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { RxLockClosed } from "react-icons/rx";
 import { MdOutlineLogout } from "react-icons/md";
 import "./Navbar.css";
+import { AuthContext } from "../../context/AuthProvider";
 
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handlerLogOut = () => {
+      logOut()
+          .then(() => {
+          })
+          .catch(err => console.log(err));
+  }
 
   return (
     <div className=" lg:block mx-auto border-2  md:max-w-full lg:w-full">
@@ -29,11 +38,12 @@ const Navbar = () => {
        </div>
           </div> */}
           <div className="navbar-end z-10">
-            <Link
+            {!user?.uid ?
+            <>
+                        <Link
               to="/login"
               className="btn btn-primary btn-xs md:btn-sm mr-4 text-white font-bold rounded-none"
             >
-              {" "}
               <MdOutlineLogout className="mr-2 " />
               Sign In
             </Link>
@@ -43,14 +53,15 @@ const Navbar = () => {
             >
               <RxLockClosed className="mr-2" />
               Register
-            </Link>
+            </Link></>:<>
             <Link
               to="/profile"
               className="ml-6"
             >
               <img src="https://i.ibb.co/tZpTSLw/blank-profile-picture-973460-340.webp" alt="" className="h-8 w-8 rounded-full" />
             </Link>
-            <p className="btn btn-primary btn-xs md:btn-sm text-white font-bold rounded-none">Logout</p>
+            <p onClick={handlerLogOut} className="btn btn-primary btn-xs md:btn-sm text-white font-bold rounded-none">Logout</p>
+            </>}
           </div>
 
         </div>

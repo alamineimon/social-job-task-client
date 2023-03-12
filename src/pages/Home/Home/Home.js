@@ -4,6 +4,7 @@ import AllFlowers from "../components/AllFlowers";
 import TrendsForYou from "../components/TrendsForYou";
 import AllPost from "../components/AllPost";
 import '../../../App.css'
+import AddPost from "../components/AddPost";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
         </div>
         {/* All types of post here */}
         <div className="lg:col-span-2 space-y-5">
+          <AddPost/>
           <AllPost />
         </div>
         {/* trends for you */}

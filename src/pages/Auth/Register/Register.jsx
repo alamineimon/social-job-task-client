@@ -1,10 +1,12 @@
-import { React, useState } from "react";
+import { React, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsEyeFill, BsEyeSlashFill, BsPersonFill } from "react-icons/bs";
 
 import { FaLock } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
+import { AuthContext } from "../../../context/AuthProvider";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const {
@@ -14,16 +16,82 @@ const Register = () => {
   } = useForm();
   const [signUpError, setSingUpError] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
-  const handelSignUp = async ({ email, password, name }) => {
-    const profile = {
-      displayName: name,
-    };
-    const user = {
-      name: name,
-      email: email,
-    };
-    console.log(user, profile);
-  };
+  const { createUser, googleSignin, updateUser } = useContext(AuthContext);
+  const [createUserEmail, setCreateUserEmail] = useState();
+  const navigate = useNavigate();
+
+  const handelSignUp = data => {
+    setSingUpError('')
+    createUser(data.email, data.password)
+        .then(result => {
+            const user = result.user;
+            // console.log(user);
+            const userInfo = {
+                displayName: data.name
+            }
+            updateUser(userInfo)
+                .then(() => {
+                    saveUser(data.name, data.role, data.email);
+                    navigate('/');
+                    toast.success(`Registration successfully`);
+                })
+                .catch(err => console.log(err));
+        })
+        .catch(error => {
+            setSingUpError(error.message)
+        })
+}
+const handlerGoogleSignin = () => {
+  googleSignin()
+      .then(result => {
+          const user = result.user;
+          const userInfo = {
+              displayName: user.displayName,
+              role: 'User',
+              email: user.email
+          }
+          updateUser(userInfo)
+              .then(() => {
+                  fetch(`http://localhost:9000/users`)
+                      .then(res => res.json())
+                      .then(result => {
+                          const data = result.find(user => user?.email === userInfo?.email)
+                          if (!data) {
+                              saveUser(userInfo.displayName, userInfo.role, userInfo.email);
+                          }
+                          navigate('/')
+                          toast.success(`Registration successfully`);
+                      }
+                      )
+              })
+              .catch(err => console.log(err));
+      })
+      .catch(error => {
+          console.error(error.message);
+      })
+}
+
+const saveUser = (name, role, email) => {
+  const user = { name, role, email };
+  fetch('http://localhost:9000/users', {
+      method: 'POST',
+      headers: {
+          'content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+  })
+      .then(res => res.json())
+      .then(data => {
+          setCreateUserEmail(email);
+      })
+}
+
+
+
+
+
+
+
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
@@ -45,7 +113,7 @@ const Register = () => {
               name="name"
               {...register("name", { required: "Name is required" })}
               placeholder="User Name"
-              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary rounded-none input-bordered  text-gray-400 focus:text-white px-8"
+              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered  focus:text-white px-8"
             />
             {errors.name && (
               <p className="text-orange-400 mt-2">{errors.name?.message}</p>
@@ -59,15 +127,28 @@ const Register = () => {
               type="email"
               name="email"
               {...register("email", {
-                required: "Email or Phone is required",
+                required: "Email  is required",
               })}
-              placeholder="Email or Phone"
-              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary rounded-none input-bordered  text-gray-400 focus:text-white px-8"
+              placeholder="Enter Your Email"
+              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary  input-bordered focus:text-white px-8"
             />
             {errors.email && (
               <p className="text-orange-400 mt-2">{errors.email?.message}</p>
             )}
           </div>
+          <div className="form-control w-full ">
+            <label className="label">
+              <span className="text-gray-900 ">Select Your Role</span>
+            </label>
+            <select
+              {...register("role", { required: "Role is required" })}
+              className="w-full select select-bordered py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary focus:text-white px-8"
+            >
+              <option className="text-gray-900 ">User</option>
+              <option className="text-gray-900 ">Admin</option>
+            </select>
+          </div>
+
           <div className="form-control w-full relative mt-8">
             <label className="absolute ml-2 mt-4 text-gray">
               <FaLock className="text-gray-400 focus:text-white"></FaLock>
@@ -81,12 +162,12 @@ const Register = () => {
                   message: "Password must be 6 characters or length",
                 },
                 pattern: {
-                  value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+                  // value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
                   message: "Password must be Strong",
                 },
               })}
               placeholder="Password"
-              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary rounded-none input-bordered  text-gray-400 focus:text-white px-8"
+              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered  focus:text-white px-8"
             />
             {errors.password && (
               <p className="text-orange-400 mt-2">{errors.password?.message}</p>
@@ -124,9 +205,9 @@ const Register = () => {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
         <div className="flex mt-2 justify-center space-x-4">
-          <button
+          <button onClick={handlerGoogleSignin}
             aria-label="Log in with Google"
-            className="flex justify-center item-center w-full text-center px-3 py-2 border rounded-md bg-gradient-to-r to-primary from-secondary text-center text-xl uppercase text-white cursor-pointer"
+            className="flex justify-center item-center w-full px-3 py-2 border rounded-md bg-gradient-to-r to-primary from-secondary text-center text-xl uppercase text-white cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

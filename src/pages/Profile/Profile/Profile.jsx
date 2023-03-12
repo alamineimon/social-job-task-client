@@ -1,6 +1,7 @@
 import React from "react";
 
 import "../../../App.css";
+import AddPost from "../../Home/components/AddPost";
 import AllFlowers from "../../Home/components/AllFlowers";
 import AllPost from "../../Home/components/AllPost";
 import InfoCard from "../../Home/components/InfoCard";
@@ -19,6 +20,7 @@ const Profile = () => {
         {/* All types of post here */}
         <div className="lg:col-span-2 space-y-5">
           <ProfileCard/>
+          <AddPost/>
           <AllPost />
         </div>
         {/* trends for you */}

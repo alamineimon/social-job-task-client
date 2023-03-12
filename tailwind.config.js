@@ -28,6 +28,10 @@ module.exports = {
           warning: "#F59A38",
 
           error: "#EE4744",
+          photo: "#4CB256",
+          video: "#4A4EB7",
+          location: "#EF5757",
+          shedule: "#E1AE4A",
 
           "--rounded-box": "0",
           "--rounded-btn": "0",
