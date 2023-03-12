@@ -64,11 +64,15 @@ const Navbar = () => {
             ) : (
               <>
                 <Link to="/profile" className="ml-6">
-                  <img
-                    src="https://i.ibb.co/tZpTSLw/blank-profile-picture-973460-340.webp"
+                  {user?.photoURL?                  <img
+                    src={user.photoURL}
                     alt=""
                     className="h-8 w-8 rounded-full"
-                  />
+                  />:                  <img
+                  src="https://i.ibb.co/tZpTSLw/blank-profile-picture-973460-340.webp"
+                  alt=""
+                  className="h-8 w-8 rounded-full"
+                />}
                 </Link>
 
                 <RiLogoutCircleRLine
