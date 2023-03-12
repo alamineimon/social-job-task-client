@@ -21,7 +21,10 @@ const PostCard = ({ data }) => {
         <img src={Comment} alt="" className="cursor-pointer" />
         <img src={Share} alt="" className="cursor-pointer" />
       </div>
-      <span className="text-gray-500">{data.likes} likes</span>
+      <div className="flex justify-between">
+        <span className="text-gray-500">{data.likes} likes</span>
+        <span className="text-gray-500 underline cursor-pointer">{data.likes} Comments</span>
+      </div>
       <div className="detail text-gray-500">
         <span className="text-black font-bold text-md">{data.name}</span>
         <span> {data.desc}</span>
