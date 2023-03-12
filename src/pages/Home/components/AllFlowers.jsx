@@ -3,7 +3,7 @@ import { Followers } from "../../../assets/Data/FollowersData";
 
 const AllFlowers = () => {
   return (
-    <div className="p-4 z-10 mt-10 h-64 w-full bg-white ">
+    <div className="p-4 z-10 mt-10 h-96 w-full bg-white ">
       <h3 className="mt-8 mb-3 ">Who is following you</h3>
 
       {Followers?.map((follower, id) => {

@@ -4,7 +4,9 @@ import { RxLockClosed } from "react-icons/rx";
 import { MdOutlineLogout } from "react-icons/md";
 import "./Navbar.css";
 
+
 const Navbar = () => {
+
   return (
     <div className=" lg:block mx-auto border-2  md:max-w-full lg:w-full">
       <div className="blur" style={{ top: "-18%", right: "0" }}></div>
@@ -48,7 +50,9 @@ const Navbar = () => {
             >
               <img src="https://i.ibb.co/tZpTSLw/blank-profile-picture-973460-340.webp" alt="" className="h-8 w-8 rounded-full" />
             </Link>
+            <p className="btn btn-primary btn-xs md:btn-sm text-white font-bold rounded-none">Logout</p>
           </div>
+
         </div>
       </div>
     </div>
