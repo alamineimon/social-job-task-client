@@ -3,24 +3,15 @@ import React from 'react'
 import { PostsData } from '../../../assets/Data/PostsData'
 import PostCard from './PostCard'
 
-const AllPost = () => {
+const AllPost = ({allpost,handleLike}) => {
 
-  const { data: allpost, isLoading } = useQuery({
-    queryKey: ["allpost"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:9000/allpost", {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
-      const data = await res.json();
-      return data;
-    },
-  });
+
+
+
   return (
     <div className="flex-col gap-6">
-    {allpost?.map((post, id)=>{
-        return <PostCard data={post} id={id}/>
+    {allpost?.map((post)=>{
+        return <PostCard key={post._id} data={post}  handleLike={handleLike} />
     })}
 </div>
   )

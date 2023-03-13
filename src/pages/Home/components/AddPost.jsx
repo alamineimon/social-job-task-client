@@ -159,7 +159,7 @@ const postText = e.target.name.value
           onClick={postSubmit}
           type="submit"
           value="Share"
-            className=" c px-3 py-1 border rounded-md bg-gradient-to-r to-primary from-secondary text-center text-white"
+            className=" px-3 py-1 border rounded-md bg-gradient-to-r to-primary from-secondary text-center text-white"
           />
 
           <div style={{ display: "none" }}>

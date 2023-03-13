@@ -2,45 +2,33 @@
     {
         "img": "https://i.ibb.co/sbGx02W/wallpaperflare-com-wallpaper.jpg",
         "name": "Tzuyu",
-        "desc": "Happy New Year all friends! #2023",
-        "likes": 2300,
-        "liked": true
+        "desc": "Happy New Year all friends! #2023"
     },
     {
         "img": "https://i.ibb.co/1QM9nq5/wallpaperflare-com-wallpaper-1.jpg",
         "name": "Jenny",
-        "desc": "Fave Game :)",
-        "likes": 2800,
-        "liked": false
+        "desc": "Fave Game :)"
 
     },
     {
         "img": "https://i.ibb.co/5kdpFK3/Night-Raven-Fiora.jpg",
         "name": "Selena Gomez",
-        "desc": "At Archery Festival",
-        "likes": 800,
-        "liked": false
+        "desc": "At Archery Festival"
     },
     {
         "img": "https://i.ibb.co/ySvg56X/Honor-of-Kings-Beginner-Guide-1.jpg",
         "name": "Tzuyu",
-        "desc": "Happy New Year all friends! #2023",
-        "likes": 2300,
-        "liked": false
+        "desc": "Happy New Year all friends! #2023"
     },
     {
         "img": "postPic2",
         "name": "Lisa",
-        "desc": "Party time :)",
-        "likes": 2300,
-        "liked": false
+        "desc": "Party time :)"
 
     },
     {
         "img": "https://i.ibb.co/nkdgxd6/anime-girl-Hd-4k-desktop-wallpaper-photos-505.png",
         "name": "Selena Gomez",
-        "desc": "At Archery Festival",
-        "likes": 800,
-        "liked": false
+        "desc": "At Archery Festival"
     }
 ]
