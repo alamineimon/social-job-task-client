@@ -69,7 +69,7 @@ const navigate = useNavigate();
                 required: "Email or Phone is required",
               })}
               placeholder="Email or Phone"
-              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered focus:text-white px-8"
+              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered focus:text-black px-8"
             />
             {errors.email && (
               <p className="text-orange-400 mt-2">{errors.email?.message}</p>
@@ -93,7 +93,7 @@ const navigate = useNavigate();
                 },
               })}
               placeholder="Password"
-              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered focus:text-white px-8"
+              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered focus:text-black px-8"
             />
             {errors.password && (
               <p className="text-orange-400 mt-2">{errors.password?.message}</p>

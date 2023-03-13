@@ -52,7 +52,7 @@ const handlerGoogleSignin = () => {
           }
           updateUser(userInfo)
               .then(() => {
-                  fetch(`http://localhost:9000/users`)
+                  fetch(`https://task-for-social-app-server.vercel.app/users`)
                       .then(res => res.json())
                       .then(result => {
                           const data = result.find(user => user?.email === userInfo?.email)
@@ -73,7 +73,7 @@ const handlerGoogleSignin = () => {
 
 const saveUser = (name, role, email) => {
   const user = { name, role, email };
-  fetch('http://localhost:9000/users', {
+  fetch('https://task-for-social-app-server.vercel.app/users', {
       method: 'POST',
       headers: {
           'content-type': 'application/json'
@@ -113,7 +113,7 @@ const saveUser = (name, role, email) => {
               name="name"
               {...register("name", { required: "Name is required" })}
               placeholder="User Name"
-              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered  focus:text-white px-8"
+              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered  focus:text-black px-8"
             />
             {errors.name && (
               <p className="text-orange-400 mt-2">{errors.name?.message}</p>
@@ -130,7 +130,7 @@ const saveUser = (name, role, email) => {
                 required: "Email  is required",
               })}
               placeholder="Enter Your Email"
-              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary  input-bordered focus:text-white px-8"
+              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary  input-bordered focus:text-black px-8"
             />
             {errors.email && (
               <p className="text-orange-400 mt-2">{errors.email?.message}</p>
@@ -142,7 +142,7 @@ const saveUser = (name, role, email) => {
             </label>
             <select
               {...register("role", { required: "Role is required" })}
-              className="w-full select select-bordered py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary focus:text-white px-8"
+              className="w-full select select-bordered py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary focus:text-black px-8"
             >
               <option className="text-gray-900 ">User</option>
               <option className="text-gray-900 ">Admin</option>
@@ -167,7 +167,7 @@ const saveUser = (name, role, email) => {
                 },
               })}
               placeholder="Password"
-              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered  focus:text-white px-8"
+              className="w-full py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900 input input-primary input-bordered  focus:text-black px-8"
             />
             {errors.password && (
               <p className="text-orange-400 mt-2">{errors.password?.message}</p>

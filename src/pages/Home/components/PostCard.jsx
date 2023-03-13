@@ -17,7 +17,7 @@ const PostCard = ({ data, handleLike , refetch}) => {
       "Are you sure ?"
     );
     if (proceed) {
-      fetch(`http://localhost:9000/userPostDelete/${id}`, {
+      fetch(`https://task-for-social-app-server.vercel.app/userPostDelete/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

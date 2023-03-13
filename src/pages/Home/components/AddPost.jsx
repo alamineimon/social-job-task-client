@@ -75,7 +75,7 @@ const AddPost = ({refetch}) => {
   };
 
   const addToDb = (post) => {
-    fetch("http://localhost:9000/allpost", {
+    fetch("https://task-for-social-app-server.vercel.app/allpost", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -111,7 +111,6 @@ const AddPost = ({refetch}) => {
       <div className="flex-col w-11/12 gap-4">
         <input
           {...register("postText", { required: true })}
-          required
           type="text"
           name="postText"
           placeholder="What's on your mind ?"
@@ -150,10 +149,29 @@ const AddPost = ({refetch}) => {
             <AiOutlineProfile />
             Shedule
           </div>
-          <button
+          {user?.email? <>
+            <button
           type="submit"
             className=" px-3 py-1 border rounded-md bg-gradient-to-r to-primary from-secondary text-center text-white"
           >Share</button>
+          </> :<>
+            <button
+            disabled
+            className=" px-3 py-1 cursor-not-allowed border rounded-md bg-gradient-to-r to-primary from-secondary text-center text-white"
+          >Share</button>
+          </>}
+          {/* {user?.email? <>
+            <button
+          type="submit"
+            className=" px-3 py-1 border rounded-md bg-gradient-to-r to-primary from-secondary text-center text-white"
+          >Share</button>
+          </> :<>
+            <button
+            disabled
+            className=" px-3 py-1 cursor-not-allowed border rounded-md bg-gradient-to-r to-primary from-secondary text-center text-white"
+          >Share</button>
+          </>} */}
+          
 
           <div style={{ display: "none" }}>
             <input

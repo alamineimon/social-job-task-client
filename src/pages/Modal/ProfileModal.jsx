@@ -24,7 +24,7 @@ const ProfileModal = () => {
           };
 
           fetch(
-            `http://localhost:9000/users/${user?.email}`,
+            `https://task-for-social-app-server.vercel.app/users/${user?.email}`,
             {
               method: "PATCH",
               headers: {

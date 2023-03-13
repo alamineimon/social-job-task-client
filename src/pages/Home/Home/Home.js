@@ -19,7 +19,7 @@ const Home = () => {
   } = useQuery({
     queryKey: ["allpost"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:9000/allpost", {
+      const res = await fetch("https://task-for-social-app-server.vercel.app/allpost", {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -31,7 +31,7 @@ const Home = () => {
 
   // for like
   const handleLike = (id) => {
-    fetch(`http://localhost:9000/allpost/like/${id}?email=${user?.email}`, {
+    fetch(`https://task-for-social-app-server.vercel.app/allpost/like/${id}?email=${user?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -46,7 +46,8 @@ const Home = () => {
   return (
     <section className="App">
       <div className="w-10/12 mx-auto">
-        <AddPost refetch={refetch} />
+        {user?.email &&  <AddPost refetch={refetch} />}
+
         <AllPost allpost={allpost} handleLike={handleLike} refetch={refetch} />
       </div>
     </section>
