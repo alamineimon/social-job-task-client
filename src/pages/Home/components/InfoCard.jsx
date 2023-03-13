@@ -8,12 +8,12 @@ const InfoCard = () => {
     <div className="flex-col gap-1 z-10 pb-4 h-64 relative bg-white text-black p-4 rounded-md w-full ">
       <div className="flex justify-between items-center mb-4">
         <h4>Your Info</h4>
-        <div className="cursor-pointer">
+        {/* <div className="cursor-pointer">
           <label htmlFor="ProfileModal" className="btn-ghost cursor-pointer ">
             <BsPencil width="2rem" height="1.2rem" />
           </label>
           <ProfileModal/>
-        </div>
+        </div> */}
       </div>
 
       <div className="mb-2">

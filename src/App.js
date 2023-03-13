@@ -1,13 +1,14 @@
 import { RouterProvider } from "react-router-dom";
+// import { ToastContainer } from "react-toastify";
 import "./App.css";
 import router from "./routes/Routes/Routes";
-import { ToastContainer } from 'react-toastify';
+
 
 function App() {
   return (
     <div className="bg-white">
       <RouterProvider router={router}></RouterProvider>
-      <ToastContainer/>
+      {/* <ToastContainer/> */}
     </div>
   );
 }

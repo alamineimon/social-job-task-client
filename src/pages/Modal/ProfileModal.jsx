@@ -1,19 +1,43 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 const ProfileModal = () => {
+  const {user} = useContext(AuthContext)
   const {
     register,
-    formState: { errors },
     handleSubmit,
+    formState: { errors },
   } = useForm();
-  const [signUpError, setSingUpError] = useState("");
+  const imageHostingKey = "8ab0829af0fdf06d333782b540e01bbb";
+  const navigate = useNavigate();
 
-  const handelSignUp = (data) => {
-    console.log(data);
-  };
+  const handelUpdateUser = (data) => {
+        const profile = {
+            name: user.name,
+            email: user.email,
+            bio: data.title,
+            status: data.status,
+            location: data.location,
+            company: data.company,
+          };
 
+          fetch(
+            `http://localhost:9000/users/${user?.email}`,
+            {
+              method: "PATCH",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(profile),
+            }
+          )
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+            })
+        }
   return (
     <div>
       <input type="checkbox" id="ProfileModal" className="modal-toggle" />
@@ -27,7 +51,7 @@ const ProfileModal = () => {
           </label>
           <p className="text-center text-lg my-3">Your Info</p>
           {/* for input data from user */}
-          <form onSubmit={handleSubmit(handelSignUp)}>
+          <form onSubmit={handleSubmit(handelUpdateUser)}>
             <div className="form-control w-full ">
               <input
                 type="text"
@@ -92,7 +116,7 @@ const ProfileModal = () => {
               )}
             </div>
             {/* for insert image */}
-            <div className="flex mt-2 gap-3 justify-between">
+            {/* <div className="flex mt-2 gap-3 justify-between">
               <div className="form-control w-full flex ">
                 <label htmlFor="profile image">For Profile</label>
                 <input
@@ -119,7 +143,7 @@ const ProfileModal = () => {
                   <p className="text-orange-400">{errors.password?.message}</p>
                 )}
               </div>
-            </div>
+            </div> */}
 
             <br />
             <input
@@ -127,9 +151,6 @@ const ProfileModal = () => {
               value="Update"
               type="submit"
             />
-            <div>
-              {signUpError && <p className="text-orange-400">{signUpError}</p>}
-            </div>
           </form>
         </div>
       </div>

@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import moment from "moment/moment";
 
-const AddPost = () => {
+const AddPost = ({refetch}) => {
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState([]);
   const [err, setErr] = useState("");
@@ -39,17 +39,13 @@ const AddPost = () => {
   };
 
 
-  const postSubmit = (e) => {
-e.preventDefault()
-const postText = e.target.name.value
+  const handelPostSubmit = (data) => {
     if (file.length === 0) {
       const post = {
-        postText,
+        desc: data.postText,
         postTime: moment().format("Do MMM YYYY, h:mm a"),
         authorName: user.name,
-        authorImage: user.photoURL,
         authorEmail: user.email,
-        auhorId: user._id
       };
       addToDb(post);
       console.log("no picture");
@@ -57,23 +53,21 @@ const postText = e.target.name.value
     }
     if (file.length) {
       const image = file[0];
-      const formdata = new FormData();
-      formdata.append("image", image);
+      const formData = new FormData();
+      formData.append("image", image);
       const url = `https://api.imgbb.com/1/upload?key=${imghostKey}`;
       fetch(url, {
         method: "POST",
-        body: formdata,
+        body: formData,
       })
         .then((res) => res.json())
         .then((bbdata) => {
           const post = {
             img: bbdata.data.display_url,
-            postText,
+            desc: data.postText,
             postTime: moment().format("Do MMM YYYY, h:mm a"),
-            authorName: user.name,
-            authorImage: user.photoURL,
-            authorEmail: user.email,
-            auhorId: user._id
+            name: user.displayName,
+            email: user.email,
           };
           addToDb(post);
         });
@@ -93,9 +87,9 @@ const postText = e.target.name.value
         if (resdata?.acknowledged) {
           deleteImg();
           reset();
-          return toast.success("Post added");
+          refetch()
         }
-        toast.error("Failed to post");
+
       });
   };
 
@@ -111,7 +105,8 @@ const postText = e.target.name.value
   };
   return (
     <form
-     className="flex bg-white p-4 rounded-md gap-4">
+    onSubmit={handleSubmit(handelPostSubmit)}
+     className="flex bg-white p-4 rounded-md gap-4 mb-6">
       <img src={ProfileImage} alt="" className="w-12 h-12 rounded-full" />
       <div className="flex-col w-11/12 gap-4">
         <input
@@ -124,7 +119,7 @@ const postText = e.target.name.value
         />
         <div className="flex justify-around">
           <button
-            type="button"
+            type="submit"
             className=" p-1 pl-2 pr-2 rounded-sm flex justify-center items-center hover:cursor-pointer text-[#4CB256]"
             onClick={handleButtonClick}
           >
@@ -156,11 +151,9 @@ const postText = e.target.name.value
             Shedule
           </div>
           <button
-          onClick={postSubmit}
           type="submit"
-          value="Share"
             className=" px-3 py-1 border rounded-md bg-gradient-to-r to-primary from-secondary text-center text-white"
-          />
+          >Share</button>
 
           <div style={{ display: "none" }}>
             <input
